@@ -650,3 +650,23 @@ closeMemory.addEventListener("click",()=>{
     }
 
 });
+
+const closeMemory = document.getElementById("closeMemory");
+
+closeMemory.addEventListener("click",()=>{
+
+    document.getElementById("memoryViewer").style.display="none";
+
+    openedMemories++;
+
+    if(openedMemories === memoryData.length){
+
+        setTimeout(()=>{
+
+            alert("LOVE ME animasyonu burada başlayacak.");
+
+        },800);
+
+    }
+
+});

@@ -580,10 +580,19 @@ function createMemoryScene(){
 
         orb.className="memoryOrb";
 
-        orb.style.left = (index * 90) + "px";
+      const centerX = 450;
+     const centerY = 300;
 
-         orb.style.top = "200px";
+      const angle = (Math.PI * 2 / memoryData.length) * index;
 
+      const radius = 180 + Math.random() * 80;
+
+       orb.style.left =
+      (centerX + Math.cos(angle) * radius) + "px";
+
+      orb.style.top =
+      (centerY + Math.sin(angle) * radius) + "px";
+        
         orb.style.animationDelay=(Math.random()*3)+"s";
 
         console.log(orb);

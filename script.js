@@ -574,8 +574,6 @@ function createMemoryScene(){
 
     const container=document.getElementById("memoryContainer");
 
-    console.log(container);
-
     memoryData.forEach((item,index)=>{
 
         const orb=document.createElement("div");

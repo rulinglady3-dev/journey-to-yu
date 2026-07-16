@@ -5,6 +5,51 @@
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
 let scene2Finished = false;
+let scene3Started = false;
+
+const memoryData = [
+
+    {
+        gif:"images/gifs/gif1.gif",
+        text:""
+    },
+
+    {
+        gif:"images/gifs/gif2.gif",
+        text:""
+    },
+
+    {
+        gif:"images/gifs/gif3.gif",
+        text:""
+    },
+
+    {
+        gif:"images/gifs/gif4.gif",
+        text:""
+    },
+
+    {
+        gif:"images/gifs/gif5.gif",
+        text:""
+    },
+
+    {
+        gif:"images/gifs/gif6.gif",
+        text:""
+    },
+
+    {
+        gif:"images/gifs/gif7.gif",
+        text:""
+    },
+
+    {
+        gif:"images/gifs/gif8.gif",
+        text:""
+    }
+
+];
 
 resizeCanvas();
 
@@ -440,6 +485,8 @@ function animate(){
     drawParticles();
 
     scene2Animation();
+
+    createMemoryScene();
     
     if(currentScene===1){
 
@@ -514,4 +561,31 @@ if(cameraDepth > 8 && !scene2Finished){
     },1800);
 
 }
+}
+function createMemoryScene(){
+
+    if(currentScene!==2) return;
+
+    if(scene3Started) return;
+
+    scene3Started=true;
+
+    const container=document.getElementById("memoryContainer");
+
+    memoryData.forEach((item,index)=>{
+
+        const orb=document.createElement("div");
+
+        orb.className="memoryOrb";
+
+        orb.style.left=Math.random()*780+"px";
+
+        orb.style.top=Math.random()*500+"px";
+
+        orb.style.animationDelay=(Math.random()*3)+"s";
+
+        container.appendChild(orb);
+
+    });
+
 }

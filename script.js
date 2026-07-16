@@ -4,6 +4,7 @@
 
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
+let scene2Finished = false;
 
 resizeCanvas();
 
@@ -498,5 +499,19 @@ function scene2Animation(){
         );
 
     }
+if(cameraDepth > 8 && !scene2Finished){
 
+    scene2Finished = true;
+
+    const flash = document.getElementById("whiteFlash");
+
+    flash.style.opacity = 1;
+
+    setTimeout(()=>{
+
+        showScene(2);
+
+    },1800);
+
+}
 }

@@ -51,6 +51,8 @@ const memoryData = [
 
 ];
 
+let openedMemories = 0;
+
 resizeCanvas();
 
 window.addEventListener("resize", resizeCanvas);
@@ -596,9 +598,42 @@ function createMemoryScene(){
         orb.style.animationDelay=(Math.random()*3)+"s";
 
         console.log(orb);
+
+        orb.addEventListener("click",()=>{
+
+    document.getElementById("memoryViewer").style.display="flex";
+
+    document.getElementById("memoryGif").src=item.gif;
+
+    document.getElementById("memoryText").textContent=item.text;
+
+    orb.style.pointerEvents="none";
+
+    orb.style.opacity=".15";
+
+});
         
         container.appendChild(orb);
 
     });
 
 }
+const closeMemory=document.getElementById("closeMemory");
+
+closeMemory.addEventListener("click",()=>{
+
+    document.getElementById("memoryViewer").style.display="none";
+
+    openedMemories++;
+
+    if(openedMemories===memoryData.length){
+
+        setTimeout(()=>{
+
+            alert("LOVE ME animasyonu burada başlayacak.");
+
+        },800);
+
+    }
+
+});

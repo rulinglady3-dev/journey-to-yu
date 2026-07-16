@@ -221,16 +221,16 @@ class Particle{
         this.x = x;
         this.y = y;
 
-        this.vx =
-        (Math.random()-0.5)*10;
+       this.vx =
+       (Math.random()-0.5)*22;
 
-        this.vy =
-        (Math.random()-0.5)*10;
+       this.vy =
+       (Math.random()-0.5)*22;
 
         this.size =
-        2 + Math.random()*4;
+        3 + Math.random()*6;
 
-        this.life = 120;
+        this.life = 180;
 
     }
 
@@ -304,7 +304,7 @@ function startJourney(){
 
     touchText.style.pointerEvents = "none";
 
-    for(let i=0;i<1800;i++){
+    for(let i=0;i<3000;i++){
 
         particles.push(
 

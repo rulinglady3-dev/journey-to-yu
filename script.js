@@ -266,3 +266,170 @@ class Particle{
     }
 
 }
+/*=========================================================
+    MOUSE
+=========================================================*/
+
+const mouse = {
+
+    x: window.innerWidth / 2,
+
+    y: window.innerHeight / 2
+
+};
+
+window.addEventListener("mousemove", e => {
+
+    mouse.x = e.clientX;
+
+    mouse.y = e.clientY;
+
+});
+
+/*=========================================================
+    TOUCH THE UNIVERSE
+=========================================================*/
+
+const touchText = document.getElementById("touchText");
+
+let introStarted = false;
+
+touchText.addEventListener("click", startJourney);
+
+function startJourney(){
+
+    if(introStarted) return;
+
+    introStarted = true;
+
+    touchText.style.pointerEvents = "none";
+
+    for(let i=0;i<1800;i++){
+
+        particles.push(
+
+            new Particle(
+
+                canvas.width/2,
+
+                canvas.height/2
+
+            )
+
+        );
+
+    }
+
+    document
+        .querySelector(".intro-container")
+        .classList
+        .add("fadeOut");
+
+    setTimeout(()=>{
+
+        showScene(1);
+
+    },1400);
+
+}
+
+/*=========================================================
+    DRAW
+=========================================================*/
+
+function drawBackground(){
+
+    ctx.fillStyle = "black";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+}
+
+/*=========================================================
+    STARS
+=========================================================*/
+
+function drawStars(){
+
+    for(const star of stars){
+
+        const dx =
+        (mouse.x-canvas.width/2)*0.0008;
+
+        const dy =
+        (mouse.y-canvas.height/2)*0.0008;
+
+        star.x += dx;
+
+        star.y += dy;
+
+        star.update();
+
+        star.draw();
+
+    }
+
+}
+
+/*=========================================================
+    METEORS
+=========================================================*/
+
+function drawMeteors(){
+
+    for(const meteor of meteors){
+
+        meteor.update();
+
+        meteor.draw();
+
+    }
+
+}
+
+/*=========================================================
+    PARTICLES
+=========================================================*/
+
+function drawParticles(){
+
+    for(let i=particles.length-1;i>=0;i--){
+
+        particles[i].update();
+
+        particles[i].draw();
+
+        if(particles[i].life<=0){
+
+            particles.splice(i,1);
+
+        }
+
+    }
+
+}
+
+/*=========================================================
+    ANIMATION LOOP
+=========================================================*/
+
+function animate(){
+
+    requestAnimationFrame(animate);
+
+    drawBackground();
+
+    drawStars();
+
+    drawMeteors();
+
+    drawParticles();
+
+}
+
+animate();

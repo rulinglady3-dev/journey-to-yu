@@ -618,23 +618,27 @@ function createMemoryScene(){
     });
 
 }
-const closeMemory=document.getElementById("closeMemory");
+const closeMemory = document.getElementById("closeMemory");
 
-closeMemory.addEventListener("click",()=>{
+if(closeMemory){
 
-    document.getElementById("memoryViewer").style.display="none";
+    closeMemory.addEventListener("click",()=>{
 
-    openedMemories++;
+        document.getElementById("memoryViewer").style.display = "none";
 
-    if(openedMemories===memoryData.length){
+        openedMemories++;
 
-        setTimeout(()=>{
+        if(openedMemories === memoryData.length){
 
-            alert("LOVE ME animasyonu burada başlayacak.");
+            setTimeout(()=>{
 
-        },800);
+                alert("LOVE ME animasyonu burada başlayacak.");
 
-    }
+            },800);
 
-});
+        }
+
+    });
+
+}
 

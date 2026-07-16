@@ -329,8 +329,8 @@ body{
     left:50%;
     top:50%;
 
-    width:900px;
-    height:900px;
+    width:1400px;
+    height:1400px;
 
     transform:translate(-50%,-50%);
 
@@ -353,8 +353,8 @@ body{
 
     position:absolute;
 
-    width:180px;
-    height:180px;
+    width:260px;
+    height:260px;
 
     border-radius:50%;
 
@@ -384,8 +384,8 @@ body{
 
     position:absolute;
 
-    width:320px;
-    height:320px;
+    width:430px;
+    height:430px;
 
     border:1px solid rgba(255,255,255,.12);
 

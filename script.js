@@ -469,7 +469,7 @@ function scene2Animation(){
 
     if(currentScene !== 1) return;
 
-    cameraDepth += 0.015;
+    cameraDepth += 0.05;
 
     const planet = document.getElementById("planet");
     const glow = document.querySelector(".space-glow");

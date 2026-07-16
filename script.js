@@ -368,7 +368,15 @@ function drawStars(){
 
         star.y += dy;
 
-        star.update();
+        if(currentScene===1){
+
+    star.y += star.speed*3;
+
+}else{
+
+    star.update();
+
+}
 
         star.draw();
 
@@ -429,6 +437,9 @@ function animate(){
     drawMeteors();
 
     drawParticles();
+
+    scene2Animation();
+    
     if(currentScene===1){
 
     const planet =
@@ -447,3 +458,45 @@ function animate(){
 }
 
 animate();
+/*=========================================================
+    SCENE 2 CAMERA
+=========================================================*/
+
+let cameraDepth = 0;
+
+function scene2Animation(){
+
+    if(currentScene !== 1) return;
+
+    cameraDepth += 0.015;
+
+    const planet = document.getElementById("planet");
+    const glow = document.querySelector(".space-glow");
+    const text = document.getElementById("travelText");
+
+    if(planet){
+
+        const scale = 1 + cameraDepth * 0.06;
+
+        planet.style.transform =
+        `translate(-50%,-50%) scale(${scale})`;
+    }
+
+    if(glow){
+
+        glow.style.transform =
+        `translate(-50%,-50%) scale(${1+cameraDepth*0.12})`;
+
+    }
+
+    if(text){
+
+        text.style.opacity =
+        Math.max(
+            1-cameraDepth*0.2,
+            0
+        );
+
+    }
+
+}

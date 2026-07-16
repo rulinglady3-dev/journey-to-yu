@@ -612,6 +612,19 @@ function createMemoryScene(){
     orb.style.opacity=".15";
 
 });
+        orb.addEventListener("click",()=>{
+
+    document.getElementById("memoryViewer").style.display="flex";
+
+    document.getElementById("memoryGif").src=item.gif;
+
+    document.getElementById("memoryText").textContent=item.text;
+
+    orb.style.pointerEvents="none";
+
+    orb.style.opacity=".15";
+
+});
         
         container.appendChild(orb);
 

@@ -429,6 +429,20 @@ function animate(){
     drawMeteors();
 
     drawParticles();
+    if(currentScene===1){
+
+    const planet =
+    document.getElementById("planet");
+
+    if(planet){
+
+        const time=Date.now()*0.001;
+
+        planet.style.transform=
+        `translate(-50%,-50%) scale(${1+Math.sin(time)*0.03})`;
+    }
+
+}
 
 }
 

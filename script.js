@@ -580,12 +580,14 @@ function createMemoryScene(){
 
         orb.className="memoryOrb";
 
-        orb.style.left=Math.random()*780+"px";
+        orb.style.left = (index * 90) + "px";
 
-        orb.style.top=Math.random()*500+"px";
+         orb.style.top = "200px";
 
         orb.style.animationDelay=(Math.random()*3)+"s";
 
+        console.log(orb);
+        
         container.appendChild(orb);
 
     });

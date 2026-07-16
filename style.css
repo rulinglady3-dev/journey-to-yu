@@ -477,3 +477,22 @@ body{
     }
 
 }
+/*=========================================================
+    WHITE FLASH
+=========================================================*/
+
+#whiteFlash{
+
+    position:absolute;
+
+    inset:0;
+
+    background:white;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity 2s ease;
+
+}

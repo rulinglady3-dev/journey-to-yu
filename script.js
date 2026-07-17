@@ -696,9 +696,13 @@ setTimeout(()=>{
 
 }
 
+let orbitRotation = 0;
+
 function updateMemoryOrbs(){
 
     if(currentScene!==2) return;
+
+    orbitRotation += 0.0015;
 
     const container=document.getElementById("memoryContainer");
 

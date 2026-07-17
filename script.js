@@ -538,6 +538,8 @@ function animate(){
     createMemoryScene();
 
     updateMemoryOrbs();
+
+    drawOrbConnections();
     
     if(currentScene===1){
 

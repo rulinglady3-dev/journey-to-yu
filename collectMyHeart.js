@@ -39,6 +39,8 @@ resizeCollectCanvas();
 
 function startCollectMyHeart(){
 
+    console.log("startCollectMyHeart çalıştı");
+
     document.querySelectorAll(".scene").forEach(scene=>{
 
         scene.style.display="none";

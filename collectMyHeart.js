@@ -86,6 +86,8 @@ function drawPlayer(){
 }
 
 function updateCollectGame(){
+    
+    console.log("game running");
 
     if(!collectRunning) return;
 

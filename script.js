@@ -829,7 +829,7 @@ setTimeout(()=>{
 
             setTimeout(()=>{
 
-                startGame1();
+                startCollectMyHeart();
 
             },800);
 

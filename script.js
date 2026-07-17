@@ -259,7 +259,6 @@ for(let i=0;i<4;i++){
 /*=========================================================
     PARTICLES
 =========================================================*/
-
 const particles = [];
 
 class Particle{
@@ -269,78 +268,18 @@ class Particle{
         this.x = x;
         this.y = y;
 
-       this.vx =
-       (Math.random()-0.5)*22;
+        this.vx = (Math.random()-0.5)*22;
+        this.vy = (Math.random()-0.5)*22;
 
-       this.vy =
-       (Math.random()-0.5)*22;
-
-        this.size =
-        3 + Math.random()*6;
+        this.size = 3 + Math.random()*6;
 
         this.life = 180;
 
     }
 
-    function explodeOrb(x,y){
-
-    for(let i=0;i<120;i++){
-
-        particles.push({
-
-            x:x,
-
-            y:y,
-
-            vx:(Math.random()-0.5)*12,
-
-            vy:(Math.random()-0.5)*12,
-
-            size:2+Math.random()*5,
-
-            life:70,
-
-            update(){
-
-                this.x+=this.vx;
-
-                this.y+=this.vy;
-
-                this.life--;
-
-                this.size*=0.97;
-
-            },
-
-            draw(){
-
-                ctx.beginPath();
-
-                ctx.fillStyle=
-                "rgba(255,220,245,"+(this.life/70)+")";
-
-                ctx.arc(
-                    this.x,
-                    this.y,
-                    this.size,
-                    0,
-                    Math.PI*2
-                );
-
-                ctx.fill();
-
-            }
-
-        });
-
-    }
-
-}
-
     update(){
 
         this.x += this.vx;
-
         this.y += this.vy;
 
         this.life--;
@@ -369,6 +308,59 @@ class Particle{
     }
 
 }
+
+function explodeOrb(x,y){
+
+    for(let i=0;i<120;i++){
+
+        particles.push({
+
+            x:x,
+            y:y,
+
+            vx:(Math.random()-0.5)*12,
+            vy:(Math.random()-0.5)*12,
+
+            size:2+Math.random()*5,
+
+            life:70,
+
+            update(){
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                this.life--;
+
+                this.size *= 0.97;
+
+            },
+
+            draw(){
+
+                ctx.beginPath();
+
+                ctx.fillStyle =
+                "rgba(255,220,245,"+(this.life/70)+")";
+
+                ctx.arc(
+                    this.x,
+                    this.y,
+                    this.size,
+                    0,
+                    Math.PI*2
+                );
+
+                ctx.fill();
+
+            }
+
+        });
+
+    }
+
+}
+
 /*=========================================================
     MOUSE
 =========================================================*/

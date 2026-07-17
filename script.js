@@ -631,8 +631,9 @@ function createMemoryScene(){
 
 orb.className = "memoryOrb";
 
-const centerX = 450;
-const centerY = 300;
+const centerX = container.clientWidth / 2;
+
+const centerY = container.clientHeight / 2;
 
 const angle =
 (index / memoryData.length) *
@@ -705,9 +706,9 @@ function updateMemoryOrbs(){
 
     const orbs=container.querySelectorAll(".memoryOrb");
 
-    const centerX=450;
+    const centerX = container.clientWidth / 2;
 
-    const centerY=300;
+    const centerY = container.clientHeight / 2;
 
     orbs.forEach((orb)=>{
 

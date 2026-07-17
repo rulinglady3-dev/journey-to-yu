@@ -282,6 +282,61 @@ class Particle{
 
     }
 
+    function explodeOrb(x,y){
+
+    for(let i=0;i<120;i++){
+
+        particles.push({
+
+            x:x,
+
+            y:y,
+
+            vx:(Math.random()-0.5)*12,
+
+            vy:(Math.random()-0.5)*12,
+
+            size:2+Math.random()*5,
+
+            life:70,
+
+            update(){
+
+                this.x+=this.vx;
+
+                this.y+=this.vy;
+
+                this.life--;
+
+                this.size*=0.97;
+
+            },
+
+            draw(){
+
+                ctx.beginPath();
+
+                ctx.fillStyle=
+                "rgba(255,220,245,"+(this.life/70)+")";
+
+                ctx.arc(
+                    this.x,
+                    this.y,
+                    this.size,
+                    0,
+                    Math.PI*2
+                );
+
+                ctx.fill();
+
+            }
+
+        });
+
+    }
+
+}
+
     update(){
 
         this.x += this.vx;
@@ -598,6 +653,16 @@ function createMemoryScene(){
         console.log(orb);
 
         orb.addEventListener("click",()=>{
+
+            const rect = orb.getBoundingClientRect();
+
+explodeOrb(
+
+    rect.left + rect.width/2,
+
+    rect.top + rect.height/2
+
+);
 
     document.getElementById("memoryViewer").style.display="flex";
 

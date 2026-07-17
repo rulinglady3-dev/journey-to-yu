@@ -53,6 +53,26 @@ const memoryData = [
 
 let openedMemories = 0;
 
+let finalStage = false;
+
+let finalParticles = [];
+
+let finalTargets = [];
+
+let finalWordIndex = 0;
+
+const finalWords = [
+
+    "LOVE ME",
+
+    "HUG ME",
+
+    "KISS ME",
+
+    "FOREVER"
+
+];
+
 resizeCanvas();
 
 window.addEventListener("resize", resizeCanvas);
@@ -809,13 +829,21 @@ setTimeout(()=>{
 
             setTimeout(()=>{
 
-                alert("LOVE ME animasyonu burada başlayacak.");
+                startFinalSequence();
 
             },800);
 
         }
 
     });
+
+}
+
+function startFinalSequence(){
+
+    finalStage = true;
+
+    console.log("FINAL START");
 
 }
 

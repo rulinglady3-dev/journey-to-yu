@@ -666,6 +666,14 @@ explodeOrb(
 
     document.getElementById("memoryViewer").style.display="flex";
 
+    const card = document.getElementById("memoryCard");
+
+setTimeout(()=>{
+
+    card.classList.add("show");
+
+},20);
+
     document.getElementById("memoryGif").src=item.gif;
 
     document.getElementById("memoryText").textContent=item.text;
@@ -687,7 +695,17 @@ if(closeMemory){
 
     closeMemory.addEventListener("click",()=>{
 
-        document.getElementById("memoryViewer").style.display = "none";
+        const viewer = document.getElementById("memoryViewer");
+
+const card = document.getElementById("memoryCard");
+
+card.classList.remove("show");
+
+setTimeout(()=>{
+
+    viewer.style.display="none";
+
+},500);
 
         openedMemories++;
 

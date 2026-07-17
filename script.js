@@ -829,7 +829,7 @@ setTimeout(()=>{
 
             setTimeout(()=>{
 
-                startFinalSequence();
+                startGame1();
 
             },800);
 

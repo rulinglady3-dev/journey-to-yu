@@ -735,3 +735,77 @@ opacity .6s ease;
     }
 
 }
+
+/*=========================================================
+    COLLECT MY HEART
+=========================================================*/
+
+#collectMyHeartScene{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    background:#02030d;
+
+    overflow:hidden;
+
+    z-index:500;
+
+}
+
+#collectTitle{
+
+    color:white;
+
+    font-size:55px;
+
+    margin-bottom:15px;
+
+    letter-spacing:4px;
+
+}
+
+#collectSubtitle{
+
+    color:#ffc9ea;
+
+    font-size:22px;
+
+    margin-bottom:35px;
+
+}
+
+#heartCounter{
+
+    position:absolute;
+
+    top:40px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
+
+#collectCanvas{
+
+    position:absolute;
+
+    inset:0;
+
+}

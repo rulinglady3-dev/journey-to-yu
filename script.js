@@ -536,6 +536,8 @@ function animate(){
     scene2Animation();
 
     createMemoryScene();
+
+    updateMemoryOrbs();
     
     if(currentScene===1){
 
@@ -625,6 +627,12 @@ function createMemoryScene(){
 
         const orb=document.createElement("div");
 
+        orb.dataset.angle = Math.random() * Math.PI * 2;
+
+orb.dataset.radius = 180 + Math.random() * 80;
+
+orb.dataset.speed = 0.002 + Math.random() * 0.002;
+
         orb.className="memoryOrb";
 
       const centerX = 450;
@@ -681,6 +689,39 @@ setTimeout(()=>{
     });
 
 }
+
+function updateMemoryOrbs(){
+
+    if(currentScene!==2) return;
+
+    const container=document.getElementById("memoryContainer");
+
+    if(!container) return;
+
+    const orbs=container.querySelectorAll(".memoryOrb");
+
+    const centerX=450;
+
+    const centerY=300;
+
+    orbs.forEach((orb)=>{
+
+        let angle=parseFloat(orb.dataset.angle);
+
+        angle+=parseFloat(orb.dataset.speed);
+
+        orb.dataset.angle=angle;
+
+        const radius=parseFloat(orb.dataset.radius);
+
+        orb.style.left=(centerX+Math.cos(angle)*radius)+"px";
+
+        orb.style.top=(centerY+Math.sin(angle)*radius)+"px";
+
+    });
+
+}
+
 const closeMemory = document.getElementById("closeMemory");
 
 if(closeMemory){
@@ -714,4 +755,5 @@ setTimeout(()=>{
     });
 
 }
+
 

@@ -627,25 +627,25 @@ function createMemoryScene(){
 
     memoryData.forEach((item,index)=>{
 
-        const orb=document.createElement("div");
+       const orb = document.createElement("div");
 
-        orb.dataset.angle = angle;
+orb.className = "memoryOrb";
 
-        orb.dataset.radius = radius;
+const centerX = 450;
+const centerY = 300;
+
+const angle =
+(index / memoryData.length) *
+(Math.PI * 2) -
+Math.PI / 2;
+
+const radius = 260;
+
+orb.dataset.angle = angle;
+
+orb.dataset.radius = radius;
 
 orb.dataset.speed = 0.002 + Math.random() * 0.002;
-
-        orb.className="memoryOrb";
-
-      const centerX = 450;
-     const centerY = 300;
-
-      const angle =
-      (index / memoryData.length) *
-      (Math.PI * 2) -
-      Math.PI/2;
-
-      const radius = 260;
 
        orb.style.left =
       (centerX + Math.cos(angle) * radius) + "px";

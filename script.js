@@ -629,9 +629,9 @@ function createMemoryScene(){
 
         const orb=document.createElement("div");
 
-        orb.dataset.angle = Math.random() * Math.PI * 2;
+        orb.dataset.angle = angle;
 
-orb.dataset.radius = 180 + Math.random() * 80;
+        orb.dataset.radius = radius;
 
 orb.dataset.speed = 0.002 + Math.random() * 0.002;
 

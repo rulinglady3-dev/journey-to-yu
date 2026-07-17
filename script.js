@@ -640,9 +640,12 @@ orb.dataset.speed = 0.002 + Math.random() * 0.002;
       const centerX = 450;
      const centerY = 300;
 
-      const angle = (Math.PI * 2 / memoryData.length) * index;
+      const angle =
+      (index / memoryData.length) *
+      (Math.PI * 2) -
+      Math.PI/2;
 
-      const radius = 180 + Math.random() * 80;
+      const radius = 260;
 
        orb.style.left =
       (centerX + Math.cos(angle) * radius) + "px";

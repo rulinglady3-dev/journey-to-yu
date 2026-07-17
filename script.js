@@ -724,6 +724,59 @@ function updateMemoryOrbs(){
 
 }
 
+function drawOrbConnections(){
+
+    if(currentScene!==2) return;
+
+    const container=document.getElementById("memoryContainer");
+
+    if(!container) return;
+
+    const orbs=[...container.querySelectorAll(".memoryOrb")];
+
+    ctx.save();
+
+    ctx.strokeStyle="rgba(255,180,230,.18)";
+
+    ctx.lineWidth=1.2;
+
+    for(let i=0;i<orbs.length;i++){
+
+        for(let j=i+1;j<orbs.length;j++){
+
+            const x1=orbs[i].offsetLeft+35;
+            const y1=orbs[i].offsetTop+35;
+
+            const x2=orbs[j].offsetLeft+35;
+            const y2=orbs[j].offsetTop+35;
+
+            const dx=x2-x1;
+            const dy=y2-y1;
+
+            const distance=Math.sqrt(dx*dx+dy*dy);
+
+            if(distance<230){
+
+                ctx.globalAlpha=1-distance/230;
+
+                ctx.beginPath();
+
+                ctx.moveTo(x1,y1);
+
+                ctx.lineTo(x2,y2);
+
+                ctx.stroke();
+
+            }
+
+        }
+
+    }
+
+    ctx.restore();
+
+}
+
 const closeMemory = document.getElementById("closeMemory");
 
 if(closeMemory){

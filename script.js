@@ -553,28 +553,38 @@ function animate(){
 
     drawParticles();
 
-    scene2Animation();
+    switch(currentScene){
 
-    createMemoryScene();
+        case 1:
+            scene2Animation();
+            break;
 
-    updateMemoryOrbs();
+        case 2:
+            updateMemoryOrbs();
+            drawOrbConnections();
+            break;
 
-    drawOrbConnections();
-    
-    if(currentScene===1){
+        case 11:
+            updateCollectMyHeart();
+            break;
 
-    const planet =
-    document.getElementById("planet");
+        case 12:
+            updateFindMe();
+            break;
 
-    if(planet){
+        case 13:
+            updateRememberUs();
+            break;
 
-        const time=Date.now()*0.001;
+        case 14:
+            updateOneLastHug();
+            break;
 
-        planet.style.transform=
-        `translate(-50%,-50%) scale(${1+Math.sin(time)*0.03})`;
+        case 15:
+            updateFinalEngine();
+            break;
+
     }
-
-}
 
 }
 

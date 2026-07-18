@@ -71,19 +71,19 @@ window.addEventListener("mousemove",(e)=>{
 
 function drawPlayer(){
 
-    cctx.font = "70px Arial";
+    cctx.fillStyle = "cyan";
 
-    cctx.textAlign = "center";
+    cctx.beginPath();
 
-    cctx.fillText(
-
-        "🧸",
-
+    cctx.arc(
         player.x,
-
-        player.y
-
+        player.y,
+        30,
+        0,
+        Math.PI * 2
     );
+
+    cctx.fill();
 
 }
 

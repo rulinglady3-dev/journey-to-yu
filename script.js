@@ -560,9 +560,14 @@ function animate(){
             break;
 
         case 2:
-            updateMemoryOrbs();
-            drawOrbConnections();
-            break;
+
+    createMemoryScene();
+
+    updateMemoryOrbs();
+
+    drawOrbConnections();
+
+    break;
 
         case 11:
             updateCollectMyHeart();

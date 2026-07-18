@@ -75,68 +75,56 @@ function drawPlayer(){
 
     playerPulse += 0.08;
 
-    const r = 26 + Math.sin(playerPulse) * 3;
+    const scale = 1 + Math.sin(playerPulse) * 0.06;
 
-    const glow = cctx.createRadialGradient(
+    cctx.save();
 
-        player.x,
-        player.y,
+    cctx.translate(player.x, player.y);
 
-        2,
+    cctx.scale(scale, scale);
 
-        player.x,
-        player.y,
+    // Glow
+    cctx.shadowColor = "#ff6fb8";
+    cctx.shadowBlur = 35;
 
-        r * 2.4
+    cctx.fillStyle = "#ff7fc8";
 
+    cctx.beginPath();
+
+    cctx.moveTo(0,-18);
+
+    cctx.bezierCurveTo(
+        28,-48,
+        60,-8,
+        0,42
     );
 
-    glow.addColorStop(0,"rgba(255,255,255,1)");
-    glow.addColorStop(0.25,"rgba(255,210,235,1)");
-    glow.addColorStop(0.55,"rgba(255,120,190,.95)");
-    glow.addColorStop(1,"rgba(255,120,190,0)");
+    cctx.bezierCurveTo(
+        -60,-8,
+        -28,-48,
+        0,-18
+    );
 
-    cctx.fillStyle = glow;
+    cctx.fill();
+
+    // İç parlaklık
+    cctx.shadowBlur = 0;
+
+    cctx.fillStyle = "rgba(255,255,255,.55)";
 
     cctx.beginPath();
 
     cctx.arc(
-        player.x,
-        player.y,
-        r*2.4,
+        -8,
+        -12,
+        7,
         0,
         Math.PI*2
     );
 
     cctx.fill();
 
-    cctx.fillStyle="#ffffff";
-
-    cctx.beginPath();
-
-    cctx.arc(
-        player.x,
-        player.y,
-        r,
-        0,
-        Math.PI*2
-    );
-
-    cctx.fill();
-
-    cctx.fillStyle="#ff7ec6";
-
-    cctx.beginPath();
-
-    cctx.arc(
-        player.x,
-        player.y,
-        r*0.55,
-        0,
-        Math.PI*2
-    );
-
-    cctx.fill();
+    cctx.restore();
 
 }
 

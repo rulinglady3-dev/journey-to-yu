@@ -57,6 +57,8 @@ function startCollectMyHeart(){
     hearts = [];
     sparkles = [];
 
+    spawnTimer = 0;
+
     heartCounter.textContent = "❤️ 0 / 25";
 
     collectRunning = true;
@@ -206,6 +208,8 @@ function updateHearts(){
         const heart = hearts[i];
 
         heart.update();
+
+        console.log(heart.y);
 
         heart.draw();
 

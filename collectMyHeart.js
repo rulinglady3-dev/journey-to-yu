@@ -24,6 +24,8 @@ let player = {
 
 let hearts = [];
 
+let sparkles = [];
+
 function resizeCollectCanvas(){
 
     collectCanvas.width = window.innerWidth;
@@ -55,13 +57,15 @@ function startCollectMyHeart(){
 
     hearts = [];
 
-    let sparkles = [];
-
     heartCounter.textContent = "❤️ 0 / 25";
 
     collectRunning = true;
 
     player.x = collectCanvas.width / 2;
+
+    player.y = collectCanvas.height - 120;
+
+    sparkles = [];
 
 }
 
@@ -238,47 +242,52 @@ function updateHearts(){
 
     }
 
-    for(let i = hearts.length-1; i >= 0; i--){
+   for(let i = hearts.length - 1; i >= 0; i--){
 
-        hearts[i].update();
+    const heart = hearts[i];
 
-        hearts[i].draw();
+    heart.update();
 
-        const dx = heart.x - player.x;
-const dy = heart.y - player.y;
+    heart.draw();
 
-const distance = Math.sqrt(dx * dx + dy * dy);
+    const dx = heart.x - player.x;
+    const dy = heart.y - player.y;
 
-if(distance < 45){
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-    score += heart.value;
+    if(false){
 
-    if(score < 0) score = 0;
+        score += heart.value;
 
-    heartCounter.textContent =
-    "❤️ " + score + " / 25";
+        if(score < 0) score = 0;
 
-    for(let s=0; s<10; s++){
+        heartCounter.textContent = "❤️ " + score + " / 25";
 
-    sparkles.push({
+        for(let s = 0; s < 10; s++){
 
-        x: heart.x,
+            sparkles.push({
 
-        y: heart.y,
+                x: heart.x,
+                y: heart.y,
+                vx: (Math.random()-0.5) * 8,
+                vy: (Math.random()-0.5) * 8,
+                life: 25
 
-        vx: (Math.random()-0.5)*8,
+            });
 
-        vy: (Math.random()-0.5)*8,
+        }
 
-        life: 25
+        hearts.splice(i,1);
 
-    });
+        continue;
 
-}
+    }
 
-    hearts.splice(i,1);
+    if(heart.y > collectCanvas.height + 50){
 
-    continue;
+        hearts.splice(i,1);
+
+    }
 
 }
 

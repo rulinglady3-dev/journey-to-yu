@@ -143,6 +143,20 @@ function updateCollectMyHeart(){
 
     updateHearts();
 
+    if(score >= 25){
+
+    collectRunning = false;
+
+    setTimeout(()=>{
+
+        alert("You protected every piece of my heart ❤️");
+
+        // startFindMe();
+
+    },500);
+
+}
+
 }
 
 let spawnTimer = 0;
@@ -158,7 +172,24 @@ class FallingHeart{
 
         this.size = 40;
 
-        this.emoji = "❤️";
+        const r = Math.random();
+
+if(r < 0.70){
+
+    this.emoji = "❤️";
+    this.value = 1;
+
+}else if(r < 0.90){
+
+    this.emoji = "💖";
+    this.value = 3;
+
+}else{
+
+    this.emoji = "💔";
+    this.value = -1;
+
+}
 
     }
 
@@ -208,6 +239,26 @@ function updateHearts(){
         hearts[i].update();
 
         hearts[i].draw();
+
+        const dx = heart.x - player.x;
+const dy = heart.y - player.y;
+
+const distance = Math.sqrt(dx * dx + dy * dy);
+
+if(distance < 45){
+
+    score += heart.value;
+
+    if(score < 0) score = 0;
+
+    heartCounter.textContent =
+    "❤️ " + score + " / 25";
+
+    hearts.splice(i,1);
+
+    continue;
+
+}
 
         if(hearts[i].y > collectCanvas.height + 50){
 

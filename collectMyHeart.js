@@ -255,7 +255,7 @@ function updateHearts(){
 
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-    if(false){
+    if(distance < 45){
 
         score += heart.value;
 
@@ -286,16 +286,6 @@ function updateHearts(){
     if(heart.y > collectCanvas.height + 50){
 
         hearts.splice(i,1);
-
-    }
-
-}
-
-        if(hearts[i].y > collectCanvas.height + 50){
-
-            hearts.splice(i,1);
-
-        }
 
     }
 

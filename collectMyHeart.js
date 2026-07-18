@@ -39,15 +39,17 @@ resizeCollectCanvas();
 
 function startCollectMyHeart(){
 
-    console.log("startCollectMyHeart çalıştı");
-
     document.querySelectorAll(".scene").forEach(scene=>{
 
-        scene.style.display="none";
+        scene.classList.remove("active");
+        scene.style.display = "none";
 
     });
 
-    collectScene.style.display="flex";
+    collectScene.classList.add("active");
+    collectScene.style.display = "flex";
+
+    currentScene = 11;
 
     score = 0;
 
@@ -57,9 +59,7 @@ function startCollectMyHeart(){
 
     collectRunning = true;
 
-    player.x = collectCanvas.width/2;
-
-    requestAnimationFrame(updateCollectGame);
+    player.x = collectCanvas.width / 2;
 
 }
 
@@ -87,26 +87,19 @@ function drawPlayer(){
 
 }
 
-function updateCollectGame(){
-    
-    console.log("game running");
+function updateCollectMyHeart(){
 
     if(!collectRunning) return;
 
     cctx.clearRect(
-
         0,
-
         0,
-
         collectCanvas.width,
-
         collectCanvas.height
-
     );
 
     drawPlayer();
 
-    requestAnimationFrame(updateCollectGame);
+    updateHearts();
 
 }

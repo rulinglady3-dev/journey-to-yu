@@ -55,6 +55,8 @@ function startCollectMyHeart(){
 
     hearts = [];
 
+    let sparkles = [];
+
     heartCounter.textContent = "❤️ 0 / 25";
 
     collectRunning = true;
@@ -142,6 +144,8 @@ function updateCollectMyHeart(){
     drawPlayer();
 
     updateHearts();
+
+    updateSparkles();
 
     if(score >= 25){
 
@@ -254,6 +258,24 @@ if(distance < 45){
     heartCounter.textContent =
     "❤️ " + score + " / 25";
 
+    for(let s=0; s<10; s++){
+
+    sparkles.push({
+
+        x: heart.x,
+
+        y: heart.y,
+
+        vx: (Math.random()-0.5)*8,
+
+        vy: (Math.random()-0.5)*8,
+
+        life: 25
+
+    });
+
+}
+
     hearts.splice(i,1);
 
     continue;
@@ -263,6 +285,42 @@ if(distance < 45){
         if(hearts[i].y > collectCanvas.height + 50){
 
             hearts.splice(i,1);
+
+        }
+
+    }
+
+}
+
+function updateSparkles(){
+
+    for(let i=sparkles.length-1;i>=0;i--){
+
+        const p=sparkles[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        p.life--;
+
+        cctx.fillStyle =
+        "rgba(255,220,240," + (p.life/25) + ")";
+
+        cctx.beginPath();
+
+        cctx.arc(
+            p.x,
+            p.y,
+            3,
+            0,
+            Math.PI*2
+        );
+
+        cctx.fill();
+
+        if(p.life <= 0){
+
+            sparkles.splice(i,1);
 
         }
 

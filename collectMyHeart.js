@@ -220,7 +220,7 @@ function updateHearts(){
 
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if(distance < 45){
+        if(distance < 20){
 
             score += heart.value;
 

@@ -40,6 +40,8 @@ resizeCollectCanvas();
 
 function startCollectMyHeart(){
 
+    console.log("START");
+
     document.querySelectorAll(".scene").forEach(scene=>{
 
         scene.classList.remove("active");

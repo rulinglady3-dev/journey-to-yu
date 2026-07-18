@@ -69,18 +69,71 @@ window.addEventListener("mousemove",(e)=>{
 
 });
 
+let playerPulse = 0;
+
 function drawPlayer(){
 
-    cctx.fillStyle = "cyan";
+    playerPulse += 0.08;
+
+    const r = 26 + Math.sin(playerPulse) * 3;
+
+    const glow = cctx.createRadialGradient(
+
+        player.x,
+        player.y,
+
+        2,
+
+        player.x,
+        player.y,
+
+        r * 2.4
+
+    );
+
+    glow.addColorStop(0,"rgba(255,255,255,1)");
+    glow.addColorStop(0.25,"rgba(255,210,235,1)");
+    glow.addColorStop(0.55,"rgba(255,120,190,.95)");
+    glow.addColorStop(1,"rgba(255,120,190,0)");
+
+    cctx.fillStyle = glow;
 
     cctx.beginPath();
 
     cctx.arc(
         player.x,
         player.y,
-        30,
+        r*2.4,
         0,
-        Math.PI * 2
+        Math.PI*2
+    );
+
+    cctx.fill();
+
+    cctx.fillStyle="#ffffff";
+
+    cctx.beginPath();
+
+    cctx.arc(
+        player.x,
+        player.y,
+        r,
+        0,
+        Math.PI*2
+    );
+
+    cctx.fill();
+
+    cctx.fillStyle="#ff7ec6";
+
+    cctx.beginPath();
+
+    cctx.arc(
+        player.x,
+        player.y,
+        r*0.55,
+        0,
+        Math.PI*2
     );
 
     cctx.fill();

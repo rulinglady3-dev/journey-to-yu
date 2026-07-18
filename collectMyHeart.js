@@ -103,3 +103,77 @@ function updateCollectMyHeart(){
     updateHearts();
 
 }
+
+let spawnTimer = 0;
+
+class FallingHeart{
+
+    constructor(){
+
+        this.x = Math.random() * collectCanvas.width;
+        this.y = -40;
+
+        this.speed = 2 + Math.random() * 3;
+
+        this.size = 40;
+
+        this.emoji = "❤️";
+
+    }
+
+    update(){
+
+        this.y += this.speed;
+
+    }
+
+    draw(){
+
+        cctx.font = this.size + "px Arial";
+        cctx.textAlign = "center";
+
+        cctx.fillText(
+
+            this.emoji,
+
+            this.x,
+
+            this.y
+
+        );
+
+    }
+
+}
+
+function updateHearts(){
+
+    spawnTimer++;
+
+    if(spawnTimer > 25){
+
+        hearts.push(
+
+            new FallingHeart()
+
+        );
+
+        spawnTimer = 0;
+
+    }
+
+    for(let i = hearts.length-1; i >= 0; i--){
+
+        hearts[i].update();
+
+        hearts[i].draw();
+
+        if(hearts[i].y > collectCanvas.height + 50){
+
+            hearts.splice(i,1);
+
+        }
+
+    }
+
+}

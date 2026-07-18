@@ -72,7 +72,13 @@ function startCollectMyHeart(){
 
 window.addEventListener("mousemove",(e)=>{
 
-    player.x = e.clientX;
+    window.addEventListener("mousemove",(e)=>{
+
+    const rect = collectCanvas.getBoundingClientRect();
+
+    player.x = e.clientX - rect.left;
+
+});
 
 });
 

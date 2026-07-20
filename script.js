@@ -2,7 +2,7 @@
     JOURNEY TO YU
 =========================================================*/
 
-const canvas = document.getElementById("bgCanvas");
+const canvas = document.getElementById("bgCanvas"); 
 const ctx = canvas.getContext("2d");
 let scene2Finished = false;
 let scene3Started = false;

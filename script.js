@@ -545,6 +545,8 @@ function animate(){
 
     requestAnimationFrame(animate);
 
+  if(currentScene < 11){
+
     drawBackground();
 
     drawStars();
@@ -552,6 +554,8 @@ function animate(){
     drawMeteors();
 
     drawParticles();
+
+} 
 
     switch(currentScene){
 

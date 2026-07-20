@@ -582,10 +582,6 @@ function animate(){
 
     break;
 
-        case 11:
-            updateCollectMyHeart();
-            break;
-
         case 12:
             updateFindMe();
             break;

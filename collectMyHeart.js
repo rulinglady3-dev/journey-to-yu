@@ -1,5 +1,5 @@
 /*=========================================================
-    COLLECT MY HEART
+    COLLECT MY HEART V2
 =========================================================*/
 
 const collectScene = document.getElementById("collectMyHeartScene");
@@ -9,38 +9,34 @@ const cctx = collectCanvas.getContext("2d");
 const heartCounter = document.getElementById("heartCounter");
 
 let collectRunning = false;
+let collectScore = 0;
 
-let score = 0;
+let player = {
+    x:0,
+    y:0,
+    size:42
+};
 
 let hearts = [];
 let sparkles = [];
 
-let player = {
-
-    x:0,
-    y:0,
-
-    width:90,
-    height:90
-
-};
+let spawnTimer = 0;
+let playerPulse = 0;
 
 function resizeCollectCanvas(){
 
     collectCanvas.width = window.innerWidth;
     collectCanvas.height = window.innerHeight;
 
-    player.y = collectCanvas.height - 120;
+    player.y = collectCanvas.height - 100;
 
 }
 
-window.addEventListener("resize",resizeCollectCanvas);
-
 resizeCollectCanvas();
 
-function startCollectMyHeart(){
+window.addEventListener("resize",resizeCollectCanvas);
 
-    console.log("START");
+function startCollectMyHeart(){
 
     document.querySelectorAll(".scene").forEach(scene=>{
 
@@ -54,19 +50,18 @@ function startCollectMyHeart(){
 
     currentScene = 11;
 
-    score = 0;
+    collectScore = 0;
 
     hearts = [];
     sparkles = [];
 
     spawnTimer = 0;
 
-    heartCounter.textContent = "❤️ 0 / 25";
-
     collectRunning = true;
 
-    player.x = collectCanvas.width / 2;
-    player.y = collectCanvas.height - 120;
+    heartCounter.textContent="❤️ 0 / 25";
+
+    player.x = collectCanvas.width/2;
 
 }
 
@@ -78,128 +73,68 @@ window.addEventListener("mousemove",(e)=>{
 
 });
 
-let playerPulse = 0;
-
-function drawPlayer(){
-
-    playerPulse += 0.08;
-
-    const scale =
-    1 + Math.sin(playerPulse) * 0.06;
-
-    cctx.save();
-
-    cctx.translate(player.x,player.y);
-
-    cctx.scale(scale,scale);
-
-    cctx.shadowColor="#ff6fb8";
-    cctx.shadowBlur=35;
-
-    cctx.fillStyle="#ff7fc8";
-
-    cctx.beginPath();
-
-    cctx.moveTo(0,-18);
-
-    cctx.bezierCurveTo(
-        28,-48,
-        60,-8,
-        0,42
-    );
-
-    cctx.bezierCurveTo(
-        -60,-8,
-        -28,-48,
-        0,-18
-    );
-
-    cctx.fill();
-
-    cctx.shadowBlur=0;
-
-    cctx.fillStyle="rgba(255,255,255,.6)";
-
-    cctx.beginPath();
-
-    cctx.arc(
-        -8,
-        -12,
-        7,
-        0,
-        Math.PI*2
-    );
-
-    cctx.fill();
-
-    cctx.restore();
-
-}
-
-let spawnTimer = 0;
-
 class FallingHeart{
 
     constructor(){
 
-        this.x = Math.random() * collectCanvas.width;
-        this.y = -40;
+        this.x = Math.random()*collectCanvas.width;
+        this.y = -60;
 
-        this.speed = 2 + Math.random() * 3;
-
-        this.size = 40;
+        this.speed = 3 + Math.random()*3;
 
         const r = Math.random();
 
-        if(r < 0.70){
+        if(r < .70){
 
-            this.emoji = "❤️";
-            this.value = 1;
+            this.emoji="❤️";
+            this.value=1;
 
-        }else if(r < 0.90){
+        }else if(r<.90){
 
-            this.emoji = "💖";
-            this.value = 3;
+            this.emoji="💖";
+            this.value=3;
 
         }else{
 
-            this.emoji = "💔";
-            this.value = -1;
+            this.emoji="💔";
+            this.value=-1;
 
         }
 
     }
 
-    update(){
+}
 
-        this.y += this.speed;
+function drawPlayer(){
 
-    }
+    playerPulse += 0.08;
 
-    draw(){
+    cctx.save();
 
-        cctx.font = this.size + "px Arial";
-        cctx.textAlign = "center";
+    cctx.translate(player.x,player.y);
 
-        cctx.fillText(
+    const scale = 1 + Math.sin(playerPulse)*0.05;
 
-            this.emoji,
+    cctx.scale(scale,scale);
 
-            this.x,
+    cctx.shadowColor="#ff66cc";
+    cctx.shadowBlur=35;
 
-            this.y
+    cctx.font="48px Arial";
+    cctx.textAlign="center";
+    cctx.textBaseline="middle";
 
-        );
+    cctx.fillText("💗",0,0);
 
-    }
+    cctx.restore();
 
 }
 
-function updateHearts(){
+function drawHearts(){
 
     spawnTimer++;
 
-    if(spawnTimer >= 10){
+    if(spawnTimer >= 12){
 
         hearts.push(new FallingHeart());
 
@@ -207,43 +142,42 @@ function updateHearts(){
 
     }
 
-    for(let i = hearts.length - 1; i >= 0; i--){
+    for(let i = hearts.length-1; i>=0; i--){
 
-        const heart = hearts[i];
+        const h = hearts[i];
 
-        heart.y += heart.speed;
+        h.y += h.speed;
 
-        heart.draw();
+        cctx.font="36px Arial";
+        cctx.textAlign="center";
+        cctx.textBaseline="middle";
 
-        const dx = heart.x - player.x;
-        const dy = heart.y - player.y;
+        cctx.fillText(h.emoji,h.x,h.y);
 
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        const dx = h.x-player.x;
+        const dy = h.y-player.y;
 
-        if(distance < 20){
+        if(Math.sqrt(dx*dx+dy*dy) < 35){
 
-            score += heart.value;
+            collectScore += h.value;
 
-            if(score < 0){
-
-                score = 0;
-
-            }
+            if(collectScore < 0)
+                collectScore = 0;
 
             heartCounter.textContent =
-            "❤️ " + score + " / 25";
+            `❤️ ${collectScore} / 25`;
 
-            for(let s = 0; s < 10; s++){
+            for(let k=0;k<12;k++){
 
                 sparkles.push({
 
-                    x: heart.x,
-                    y: heart.y,
+                    x:h.x,
+                    y:h.y,
 
-                    vx: (Math.random()-0.5)*8,
-                    vy: (Math.random()-0.5)*8,
+                    vx:(Math.random()-0.5)*8,
+                    vy:(Math.random()-0.5)*8,
 
-                    life:25
+                    life:20
 
                 });
 
@@ -255,7 +189,7 @@ function updateHearts(){
 
         }
 
-        if(heart.y > collectCanvas.height + 50){
+        if(h.y > collectCanvas.height+60){
 
             hearts.splice(i,1);
 
@@ -267,31 +201,22 @@ function updateHearts(){
 
 function updateSparkles(){
 
-    for(let i = sparkles.length - 1; i >= 0; i--){
+    for(let i=sparkles.length-1;i>=0;i--){
 
-        const p = sparkles[i];
+        const p=sparkles[i];
 
-        p.x += p.vx;
-        p.y += p.vy;
+        p.x+=p.vx;
+        p.y+=p.vy;
 
         p.life--;
 
-        cctx.fillStyle =
-        "rgba(255,220,240," + (p.life/25) + ")";
+        cctx.fillStyle=`rgba(255,190,220,${p.life/20})`;
 
         cctx.beginPath();
-
-        cctx.arc(
-            p.x,
-            p.y,
-            3,
-            0,
-            Math.PI * 2
-        );
-
+        cctx.arc(p.x,p.y,3,0,Math.PI*2);
         cctx.fill();
 
-        if(p.life <= 0){
+        if(p.life<=0){
 
             sparkles.splice(i,1);
 
@@ -305,31 +230,23 @@ function updateCollectMyHeart(){
 
     if(!collectRunning) return;
 
-    cctx.clearRect(
-        0,
-        0,
-        collectCanvas.width,
-        collectCanvas.height
-    );
+    cctx.clearRect(0,0,collectCanvas.width,collectCanvas.height);
 
     drawPlayer();
 
-    updateHearts();
+    drawHearts();
 
     updateSparkles();
 
-    if(score >= 25){
+    if(collectScore>=25){
 
-        collectRunning = false;
+        collectRunning=false;
 
         setTimeout(()=>{
 
-            alert("You protected every piece of my heart ❤️");
+            startFindMe();
 
-            // Daha sonra açacağız
-            // startFindMe();
-
-        },500);
+        },600);
 
     }
 

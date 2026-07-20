@@ -555,7 +555,16 @@ function animate(){
 
     drawParticles();
 
-} 
+}else{
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+}
 
     switch(currentScene){
 

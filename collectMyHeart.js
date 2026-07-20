@@ -132,6 +132,8 @@ function drawPlayer(){
 
 function drawHearts(){
 
+console.log("Hearts:", hearts.length);
+    
     spawnTimer++;
 
     if(spawnTimer >= 12){
@@ -227,6 +229,8 @@ function updateSparkles(){
 }
 
 function updateCollectMyHeart(){
+    
+    console.count("Collect Frame");
 
     if(!collectRunning) return;
 

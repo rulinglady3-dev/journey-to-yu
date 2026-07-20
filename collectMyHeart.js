@@ -59,7 +59,7 @@ function startCollectMyHeart(){
 
     heartCounter.textContent="❤️ 0 / 25";
 
-    player.x = collectCanvas.width/2;
+    player.x = gameCanvas.width / 2;
 
     player.y = gameCanvas.height - 100;
 
@@ -67,7 +67,7 @@ function startCollectMyHeart(){
 
 window.addEventListener("mousemove",(e)=>{
 
-    const rect = collectCanvas.getBoundingClientRect();
+    const rect = gameCanvas.getBoundingClientRect();
 
     player.x = e.clientX - rect.left;
 
@@ -191,7 +191,7 @@ console.log("Hearts:", hearts.length);
 
         }
 
-        if(h.y > collectCanvas.height+60){
+        if(h.y > gameCanvas.height + 60){
 
             hearts.splice(i,1);
 

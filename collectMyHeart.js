@@ -2,8 +2,8 @@
 // COLLECT MY HEART
 // ===============================
 
-const gameCanvas = document.getElementById("bgCanvas");
-const cctx = gameCanvas.getContext("2d");
+const gameCanvas = canvas;
+const cctx = ctx;
 
 const collectScene = document.getElementById("collectMyHeartScene");
 const heartCounter = document.getElementById("heartCounter");

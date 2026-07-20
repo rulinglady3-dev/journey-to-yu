@@ -72,13 +72,9 @@ function startCollectMyHeart(){
 
 window.addEventListener("mousemove",(e)=>{
 
-    window.addEventListener("mousemove",(e)=>{
-
     const rect = collectCanvas.getBoundingClientRect();
 
     player.x = e.clientX - rect.left;
-
-});
 
 });
 
@@ -203,7 +199,7 @@ function updateHearts(){
 
     spawnTimer++;
 
-    if(spawnTimer >= 25){
+    if(spawnTimer >= 10){
 
         hearts.push(new FallingHeart());
 
@@ -215,9 +211,7 @@ function updateHearts(){
 
         const heart = hearts[i];
 
-        heart.update();
-
-        console.log(heart.y);
+        heart.y += heart.speed;
 
         heart.draw();
 

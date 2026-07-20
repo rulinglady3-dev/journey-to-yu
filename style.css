@@ -801,11 +801,3 @@ opacity .6s ease;
     font-weight:bold;
 
 }
-
-#collectCanvas{
-
-    position:absolute;
-
-    inset:0;
-
-}

@@ -254,7 +254,4 @@ function updateCollectMyHeart(){
 
     }
 
-    cctx.fillStyle = "red";
-   cctx.fillRect(20,20,50,50);
-
 }

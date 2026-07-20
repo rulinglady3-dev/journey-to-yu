@@ -254,4 +254,13 @@ function updateCollectMyHeart(){
 
     }
 
+   cctx.save();
+
+cctx.globalAlpha = 0.001;
+cctx.fillStyle = "#000";
+
+cctx.fillRect(0, 0, 1, 1);
+
+cctx.restore(); 
+
 }

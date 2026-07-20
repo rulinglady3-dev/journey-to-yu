@@ -3,8 +3,9 @@
 =========================================================*/
 
 const collectScene = document.getElementById("collectMyHeartScene");
-const collectCanvas = document.getElementById("collectCanvas");
-const cctx = collectCanvas.getContext("2d");
+// Ana canvas kullanılacak
+const gameCanvas = document.getElementById("bgCanvas");
+const cctx = gameCanvas.getContext("2d");
 
 const heartCounter = document.getElementById("heartCounter");
 
@@ -25,10 +26,7 @@ let playerPulse = 0;
 
 function resizeCollectCanvas(){
 
-    collectCanvas.width = window.innerWidth;
-    collectCanvas.height = window.innerHeight;
-
-    player.y = collectCanvas.height - 100;
+    player.y = gameCanvas.height - 100;
 
 }
 
@@ -63,6 +61,8 @@ function startCollectMyHeart(){
 
     player.x = collectCanvas.width/2;
 
+    player.y = gameCanvas.height - 100;
+
 }
 
 window.addEventListener("mousemove",(e)=>{
@@ -77,7 +77,7 @@ class FallingHeart{
 
     constructor(){
 
-        this.x = Math.random()*collectCanvas.width;
+        this.x = Math.random() * gameCanvas.width;
         this.y = -60;
 
         this.speed = 3 + Math.random()*3;
@@ -233,8 +233,6 @@ function updateCollectMyHeart(){
     console.count("Collect Frame");
 
     if(!collectRunning) return;
-
-    cctx.clearRect(0,0,collectCanvas.width,collectCanvas.height);
 
     drawPlayer();
 

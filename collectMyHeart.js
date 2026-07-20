@@ -252,9 +252,9 @@ function updateCollectMyHeart(){
 
         },600);
 
-        cctx.fillStyle = "red";
-   cctx.fillRect(20,20,50,50);
-
     }
+
+    cctx.fillStyle = "red";
+   cctx.fillRect(20,20,50,50);
 
 }

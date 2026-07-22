@@ -15,7 +15,7 @@ let findMessage = false;
 let findTimer = 0;
 function startFindMe(){
 
-    showScene(12);
+    showScene(11);
 
     findRunning = true;
 

@@ -106,10 +106,9 @@ function showScene(index){
 
     currentScene = index;
 
-    console.log(
-    "Scene:",
-    index,
-    scenes[index]?.id
+    scenes.forEach((scene, i) => {
+    console.log(i, scene.id, getComputedStyle(scene).display);
+});
         
 );
 

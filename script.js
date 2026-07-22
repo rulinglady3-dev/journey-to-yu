@@ -584,14 +584,14 @@ function animate(){
 
     break;
 
+        case 10:
+       updateCollectMyHeart();
+        break;
+
        case 11:
-    updateCollectMyHeart();
-    break;
-
-        case 12:
-            updateFindMe();
-            break;
-
+         updateFindMe();
+         break;
+            
         case 13:
             updateRememberUs();
             break;

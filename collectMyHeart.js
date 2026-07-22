@@ -285,29 +285,52 @@ function updateCollectMyHeart(){
 
     if(!collectRunning) return;
 
-    ctx.fillStyle = "#ff5fa2";
+    ctx.save();
 
+ctx.translate(player.x, player.y);
+
+const t = Date.now() * 0.004;
+
+// Glow
+ctx.shadowColor = "#ff6fb8";
+ctx.shadowBlur = 30;
+
+// Dış halka
 ctx.beginPath();
-
-ctx.roundRect(
-    player.x - 25,
-    player.y - 25,
-    50,
-    50,
-    15
-);
-
+ctx.arc(0,0,28,0,Math.PI*2);
+ctx.fillStyle = "#ff5fa2";
 ctx.fill();
 
+// İç halka
+ctx.shadowBlur = 0;
+
+ctx.beginPath();
+ctx.arc(0,0,20,0,Math.PI*2);
+ctx.fillStyle = "#ff9ad5";
+ctx.fill();
+
+// Kalp
 ctx.font = "28px Arial";
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
+ctx.fillText("❤️",0,2);
 
-ctx.fillText(
-    "❤️",
-    player.x,
-    player.y + 2
-);
+// Dönen ışıklar
+for(let i=0;i<4;i++){
+
+    const a = t + i * Math.PI/2;
+
+    const x = Math.cos(a)*40;
+    const y = Math.sin(a)*40;
+
+    ctx.beginPath();
+    ctx.arc(x,y,4,0,Math.PI*2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+}
+
+ctx.restore();
 
     updateHearts();
 

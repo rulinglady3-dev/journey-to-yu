@@ -102,4 +102,97 @@ function createFindObjects(){
     };
 
 }
+// =======================================================
+// UPDATE FIND ME
+// =======================================================
+
+function updateFindMe(){
+
+    if(!findRunning) return;
+
+    // Arka plan
+
+    ctx.fillStyle = "#03040d";
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    // Yıldızlar
+
+    for(const star of stars){
+
+        star.y += star.speed;
+
+        if(star.y > canvas.height){
+
+            star.y = -5;
+            star.x = Math.random()*canvas.width;
+
+        }
+
+        ctx.globalAlpha = star.alpha;
+
+        ctx.fillStyle = "white";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            star.x,
+            star.y,
+            star.size,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+
+    }
+
+    ctx.globalAlpha = 1;
+
+    // Sahte objeler
+
+    for(const obj of fakeObjects){
+
+        if(obj.found) continue;
+
+        ctx.font = `${obj.size}px Arial`;
+
+        ctx.textAlign = "center";
+
+        ctx.textBaseline = "middle";
+
+        ctx.fillText(
+            obj.emoji,
+            obj.x,
+            obj.y
+        );
+
+    }
+
+    // Gerçek hedef
+
+    if(!yuObject.found){
+
+        ctx.font = `bold ${yuObject.size}px Arial`;
+
+        ctx.textAlign = "center";
+
+        ctx.textBaseline = "middle";
+
+        ctx.fillStyle = "#ffd8f2";
+
+        ctx.fillText(
+            yuObject.text,
+            yuObject.x,
+            yuObject.y
+        );
+
+    }
+
+}
+
 

@@ -106,6 +106,13 @@ function showScene(index){
 
     currentScene = index;
 
+    console.log(
+    "Scene:",
+    index,
+    scenes[index]?.id
+        
+);
+
 }
 
 /*=========================================================

@@ -25,18 +25,8 @@ const player = {
 
 function startCollectMyHeart(){
 
-    document.querySelectorAll(".scene").forEach(scene=>{
-
-        scene.classList.remove("active");
-        scene.style.display="none";
-
-    });
-
-    collectScene.classList.add("active");
-    collectScene.style.display="flex";
-
-    currentScene = 11;
-
+    showScene(11);
+    
     collectRunning = true;
 
     collectScore = 0;

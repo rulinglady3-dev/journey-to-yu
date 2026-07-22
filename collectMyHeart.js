@@ -260,6 +260,9 @@ function updateCollectMyHeart(){
 
     if(!collectRunning) return;
 
+    ctx.fillStyle = "red";
+ctx.fillRect(100,100,100,100);
+
     updateHearts();
 
     drawPlayer();

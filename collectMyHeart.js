@@ -156,37 +156,18 @@ function drawPlayer(){
     ctx.save();
 
     ctx.translate(player.x, player.y);
-
     ctx.scale(playerScale, playerScale);
 
-    // Pembe parlama
-    const glow = ctx.createRadialGradient(
-        0, 0, 0,
-        0, 0, 45
-    );
-
-    glow.addColorStop(0, "rgba(255,255,255,0.95)");
-    glow.addColorStop(0.25, "rgba(255,170,220,0.95)");
-    glow.addColorStop(0.55, "rgba(255,90,180,0.55)");
-    glow.addColorStop(1, "rgba(255,90,180,0)");
-
-    ctx.fillStyle = glow;
-
-    ctx.beginPath();
-    ctx.arc(0,0,45,0,Math.PI*2);
-    ctx.fill();
-
-    // Büyük pembe kalp
-    ctx.font = "52px Arial";
+    ctx.font = "54px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    ctx.fillStyle = "#ff4fa3";
-    ctx.fillText("💖",0,0);
+    ctx.fillText("💖", 0, 0);
 
     ctx.restore();
 
 }
+    
 // =======================================================
 // HEART UPDATE
 // =======================================================

@@ -1,50 +1,67 @@
-// =========================================
+// =======================================================
 // COLLECT MY HEART
-// =========================================
+// Journey To Yu
+// =======================================================
+
+// ---------- HTML ----------
 
 const collectScene = document.getElementById("collectMyHeartScene");
-const heartCounter = document.getElementById("heartCounter");
+
+// ---------- GAME ----------
 
 let collectRunning = false;
 
 let collectScore = 0;
 
+let spawnTimer = 0;
+
 let hearts = [];
+
 let sparkles = [];
 
-let spawnTimer = 0;
 let playerScale = 1;
+
+// ---------- PLAYER ----------
 
 const player = {
 
-    x: 0,
-    y: 0,
+    x:0,
 
-    radius: 28
+    y:0,
+
+    radius:26
 
 };
 
+// =======================================================
+// START GAME
+// =======================================================
+
 function startCollectMyHeart(){
 
-    heartCounter.style.display = "none";
-
     showScene(11);
-    
+
     collectRunning = true;
 
     collectScore = 0;
 
-    hearts = [];
-    sparkles = [];
-
     spawnTimer = 0;
 
-    heartCounter.textContent = "❤️ 0 / 25";
+    hearts = [];
+
+    sparkles = [];
+
+    playerScale = 1;
 
     player.x = canvas.width / 2;
+
     player.y = canvas.height - 120;
 
 }
+
+// =======================================================
+// MOUSE
+// =======================================================
 
 window.addEventListener("mousemove",(e)=>{
 
@@ -52,90 +69,32 @@ window.addEventListener("mousemove",(e)=>{
 
     player.x = e.clientX - rect.left;
 
+    if(player.x < 35){
+
+        player.x = 35;
+
+    }
+
+    if(player.x > canvas.width-35){
+
+        player.x = canvas.width-35;
+
+    }
+
 });
-// =========================================
-// PLAYER
-// =========================================
-
-let playerPulse = 0;
-
-function drawPlayer(){
-
-    playerPulse += 0.08;
-
-    const scale = 1 + Math.sin(playerPulse) * 0.06;
-
-    ctx.save();
-
-    ctx.translate(player.x,player.y);
-
-    ctx.scale(scale,scale);
-
-    // Glow
-    ctx.shadowColor = "#ff6fb8";
-    ctx.shadowBlur = 35;
-
-    // Yuvarlatılmış kutu
-    ctx.fillStyle = "#ff78c8";
-
-    ctx.beginPath();
-
-    ctx.roundRect(
-        -26,
-        -26,
-        52,
-        52,
-        16
-    );
-
-    ctx.fill();
-
-    // Beyaz parıltı
-    ctx.shadowBlur = 0;
-
-    ctx.fillStyle = "rgba(255,255,255,.35)";
-
-    ctx.beginPath();
-
-    ctx.arc(
-        -10,
-        -10,
-        8,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
-
-    // Ortadaki kalp
-    ctx.font = "28px Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-
-    ctx.fillText(
-        "❤️",
-        0,
-        2
-    );
-
-    ctx.restore();
-
-}
-
-// =========================================
+// =======================================================
 // FALLING HEART
-// =========================================
+// =======================================================
 
 class FallingHeart{
 
     constructor(){
 
-        this.x = Math.random() * canvas.width;
+        this.x = Math.random() * (canvas.width - 80) + 40;
+
         this.y = -40;
 
         this.speed = 2 + Math.random() * 3;
-
-        this.radius = 18;
 
         const r = Math.random();
 
@@ -168,8 +127,10 @@ class FallingHeart{
 
         ctx.save();
 
-        ctx.font = "36px Arial";
+        ctx.font = "34px Arial";
+
         ctx.textAlign = "center";
+
         ctx.textBaseline = "middle";
 
         ctx.fillText(
@@ -183,15 +144,120 @@ class FallingHeart{
     }
 
 }
+
+// =======================================================
+// PLAYER
+// =======================================================
+
+function drawPlayer(){
+
+    playerScale += (1-playerScale) * 0.15;
+
+    const t = Date.now() * 0.004;
+
+    ctx.save();
+
+    ctx.translate(
+        player.x,
+        player.y
+    );
+
+    ctx.scale(
+        playerScale,
+        playerScale
+    );
+
+    // Glow
+
+    ctx.shadowColor = "#ff70c5";
+
+    ctx.shadowBlur = 35;
+
+    // Aura
+
+    const g = ctx.createRadialGradient(
+        0,0,5,
+        0,0,35
+    );
+
+    g.addColorStop(0,"#ffffff");
+
+    g.addColorStop(.35,"#ff9ad5");
+
+    g.addColorStop(1,"rgba(255,120,200,0)");
+
+    ctx.fillStyle = g;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        0,
+        35,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+    // Kalp
+
+    ctx.shadowBlur = 0;
+
+    ctx.font = "30px Arial";
+
+    ctx.textAlign = "center";
+
+    ctx.textBaseline = "middle";
+
+    ctx.fillText(
+        "💖",
+        0,
+        2
+    );
+
+    // Dönen yıldızlar
+
+    for(let i=0;i<4;i++){
+
+        const a = t + i*Math.PI/2;
+
+        const x = Math.cos(a) * 42;
+
+        const y = Math.sin(a) * 42;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y,
+            3,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle = "white";
+
+        ctx.fill();
+
+    }
+
+    ctx.restore();
+
+}
+// =======================================================
+// HEART UPDATE
+// =======================================================
+
 function updateHearts(){
 
     spawnTimer++;
 
-    if(spawnTimer >= 15){
-
-        hearts.push(new FallingHeart());
+    if(spawnTimer > 28){
 
         spawnTimer = 0;
+
+        hearts.push(new FallingHeart());
 
     }
 
@@ -203,7 +269,10 @@ function updateHearts(){
 
         h.draw();
 
+        // Çarpışma
+
         const dx = h.x - player.x;
+
         const dy = h.y - player.y;
 
         const distance = Math.sqrt(dx*dx + dy*dy);
@@ -211,17 +280,40 @@ function updateHearts(){
         if(distance < 40){
 
             collectScore += h.value;
-            
-            playerScale = 1.25;
-            
+
             if(collectScore < 0){
 
                 collectScore = 0;
 
             }
 
-            heartCounter.textContent =
-                "❤️ " + collectScore + " / 25";
+            if(collectScore > 25){
+
+                collectScore = 25;
+
+            }
+
+            playerScale = 1.25;
+
+            // Sparkles
+
+            for(let j=0;j<10;j++){
+
+                sparkles.push({
+
+                    x:h.x,
+
+                    y:h.y,
+
+                    vx:(Math.random()-0.5)*8,
+
+                    vy:(Math.random()-0.5)*8,
+
+                    life:25
+
+                });
+
+            }
 
             hearts.splice(i,1);
 
@@ -229,7 +321,9 @@ function updateHearts(){
 
         }
 
-        if(h.y > canvas.height + 50){
+        // Ekrandan çıktı
+
+        if(h.y > canvas.height + 60){
 
             hearts.splice(i,1);
 
@@ -238,9 +332,10 @@ function updateHearts(){
     }
 
 }
-// =========================================
+
+// =======================================================
 // SPARKLES
-// =========================================
+// =======================================================
 
 function updateSparkles(){
 
@@ -249,10 +344,12 @@ function updateSparkles(){
         const s = sparkles[i];
 
         s.x += s.vx;
+
         s.y += s.vy;
 
-        s.vx *= 0.96;
-        s.vy *= 0.96;
+        s.vx *= 0.95;
+
+        s.vy *= 0.95;
 
         s.life--;
 
@@ -260,11 +357,17 @@ function updateSparkles(){
 
         ctx.globalAlpha = s.life / 25;
 
-        ctx.fillStyle = "#ffd6f4";
+        ctx.fillStyle = "#ffd7ef";
 
         ctx.beginPath();
 
-        ctx.arc(s.x,s.y,3,0,Math.PI*2);
+        ctx.arc(
+            s.x,
+            s.y,
+            3,
+            0,
+            Math.PI * 2
+        );
 
         ctx.fill();
 
@@ -279,93 +382,55 @@ function updateSparkles(){
     }
 
 }
-
-// =========================================
+// =======================================================
 // MAIN UPDATE
-// =========================================
+// =======================================================
 
 function updateCollectMyHeart(){
 
     if(!collectRunning) return;
 
-    ctx.save();
-
-ctx.translate(player.x, player.y);
-
-const t = Date.now() * 0.004;
-
-// Glow
-ctx.shadowColor = "#ff6fb8";
-ctx.shadowBlur = 30;
-
-// Dış halka
-ctx.beginPath();
-ctx.arc(0,0,28,0,Math.PI*2);
-ctx.fillStyle = "#ff5fa2";
-ctx.fill();
-
-// İç halka
-ctx.shadowBlur = 0;
-
-ctx.beginPath();
-ctx.arc(0,0,20,0,Math.PI*2);
-ctx.fillStyle = "#ff9ad5";
-ctx.fill();
-
-// Kalp
-ctx.font = "28px Arial";
-ctx.textAlign = "center";
-ctx.textBaseline = "middle";
-ctx.fillText("❤️",0,2);
-
-// Dönen ışıklar
-for(let i=0;i<4;i++){
-
-    const a = t + i * Math.PI/2;
-
-    const x = Math.cos(a)*40;
-    const y = Math.sin(a)*40;
-
-    ctx.beginPath();
-    ctx.arc(x,y,4,0,Math.PI*2);
-    ctx.fillStyle = "white";
-    ctx.fill();
-
-}
-
-ctx.restore();
-
+    // Kalpler
     updateHearts();
 
-    // drawPlayer();
-
+    // Efektler
     updateSparkles();
 
+    // Oyuncu EN SON çizilir
+    drawPlayer();
+
+    // Skor
     ctx.save();
 
-ctx.fillStyle = "white";
-ctx.font = "bold 30px Arial";
-ctx.textAlign = "left";
+    ctx.font = "bold 32px Arial";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "left";
 
-ctx.shadowColor = "#ff6fb8";
-ctx.shadowBlur = 15;
+    ctx.shadowColor = "#ff6fb8";
+    ctx.shadowBlur = 18;
 
-ctx.fillText(
-    `❤️ ${collectScore} / 25`,
-    30,
-    50
-);
+    ctx.fillText(
+        `❤️ ${collectScore} / 25`,
+        25,
+        45
+    );
 
-ctx.restore();
-    
+    ctx.restore();
+
+    // Kazanma
 
     if(collectScore >= 25){
 
         collectRunning = false;
 
-        alert("You protected every piece of my heart ❤️");
+        setTimeout(()=>{
 
-        // startFindMe();
+            alert("You protected every piece of my heart ❤️");
+
+            // Sonraki oyun
+            // startFindMe();
+
+        },300);
 
     }
 

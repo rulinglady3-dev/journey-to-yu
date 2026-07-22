@@ -151,96 +151,38 @@ class FallingHeart{
 
 function drawPlayer(){
 
-    playerScale += (1-playerScale) * 0.15;
-
-    const t = Date.now() * 0.004;
+    playerScale += (1 - playerScale) * 0.15;
 
     ctx.save();
 
-    ctx.translate(
-        player.x,
-        player.y
+    ctx.translate(player.x, player.y);
+
+    ctx.scale(playerScale, playerScale);
+
+    // Pembe parlama
+    const glow = ctx.createRadialGradient(
+        0, 0, 0,
+        0, 0, 45
     );
 
-    ctx.scale(
-        playerScale,
-        playerScale
-    );
+    glow.addColorStop(0, "rgba(255,255,255,0.95)");
+    glow.addColorStop(0.25, "rgba(255,170,220,0.95)");
+    glow.addColorStop(0.55, "rgba(255,90,180,0.55)");
+    glow.addColorStop(1, "rgba(255,90,180,0)");
 
-    // Glow
-
-    ctx.shadowColor = "transparent";
-
-    ctx.shadowBlur = 0;
-
-    // Aura
-
-    const g = ctx.createRadialGradient(
-        0,0,5,
-        0,0,35
-    );
-
-    g.addColorStop(0,"#ffffff");
-
-    g.addColorStop(.35,"#ff9ad5");
-
-    g.addColorStop(1,"rgba(255,120,200,0)");
-
-    ctx.fillStyle = g;
+    ctx.fillStyle = glow;
 
     ctx.beginPath();
-
-    ctx.arc(
-        0,
-        0,
-        35,
-        0,
-        Math.PI*2
-    );
-
+    ctx.arc(0,0,45,0,Math.PI*2);
     ctx.fill();
 
-    // Kalp
-
-    ctx.shadowBlur = 0;
-
-    ctx.font = "30px Arial";
-
+    // Büyük pembe kalp
+    ctx.font = "52px Arial";
     ctx.textAlign = "center";
-
     ctx.textBaseline = "middle";
 
-    ctx.fillText(
-        "💖",
-        0,
-        2
-    );
-
-    // Dönen yıldızlar
-
-    for(let i=0;i<4;i++){
-
-        const a = t + i*Math.PI/2;
-
-        const x = Math.cos(a) * 42;
-
-        const y = Math.sin(a) * 42;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            x,
-            y,
-            3,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle = "white";
-
-        ctx.fill();
-
-    }
+    ctx.fillStyle = "#ff4fa3";
+    ctx.fillText("💖",0,0);
 
     ctx.restore();
 

@@ -13,6 +13,7 @@ let hearts = [];
 let sparkles = [];
 
 let spawnTimer = 0;
+let playerScale = 1;
 
 const player = {
 
@@ -210,7 +211,9 @@ function updateHearts(){
         if(distance < 40){
 
             collectScore += h.value;
-
+            
+            playerScale = 1.25;
+            
             if(collectScore < 0){
 
                 collectScore = 0;

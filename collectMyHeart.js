@@ -47,8 +47,6 @@ function startCollectMyHeart(){
 
     collectRunning = true;
 
-    collectLoop();
-
 }
 
 window.addEventListener("mousemove",(e)=>{
@@ -312,12 +310,3 @@ function updateCollectMyHeart(){
 // GAME LOOP
 // ===============================
 
-function collectLoop(){
-
-    if(currentScene !== 11) return;
-
-    updateCollectMyHeart();
-
-    requestAnimationFrame(collectLoop);
-
-}

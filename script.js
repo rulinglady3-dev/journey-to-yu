@@ -97,10 +97,12 @@ function showScene(index){
     scenes.forEach(scene=>{
 
         scene.classList.remove("active");
+        scene.style.display = "none";
 
     });
 
     scenes[index].classList.add("active");
+    scenes[index].style.display = "flex";
 
     currentScene = index;
 

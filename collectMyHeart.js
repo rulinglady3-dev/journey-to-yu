@@ -25,6 +25,8 @@ const player = {
 
 function startCollectMyHeart(){
 
+    heartCounter.style.display = "none";
+
     showScene(11);
     
     collectRunning = true;
@@ -283,30 +285,53 @@ function updateCollectMyHeart(){
 
     if(!collectRunning) return;
 
-    ctx.fillStyle = "red";
-ctx.fillRect(100,100,100,100);
+    ctx.fillStyle = "#ff5fa2";
+
+ctx.beginPath();
+
+ctx.roundRect(
+    player.x - 25,
+    player.y - 25,
+    50,
+    50,
+    15
+);
+
+ctx.fill();
+
+ctx.font = "28px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+
+ctx.fillText(
+    "❤️",
+    player.x,
+    player.y + 2
+);
 
     updateHearts();
 
-    drawPlayer();
+    // drawPlayer();
+
+    updateSparkles();
 
     ctx.save();
 
 ctx.fillStyle = "white";
-
-ctx.font = "bold 28px Arial";
-
+ctx.font = "bold 30px Arial";
 ctx.textAlign = "left";
 
+ctx.shadowColor = "#ff6fb8";
+ctx.shadowBlur = 15;
+
 ctx.fillText(
-    "❤️ " + collectScore + " / 25",
-    35,
+    `❤️ ${collectScore} / 25`,
+    30,
     50
 );
 
 ctx.restore();
     
-    updateSparkles();
 
     if(collectScore >= 25){
 

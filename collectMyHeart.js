@@ -39,7 +39,7 @@ const player = {
 
 function startCollectMyHeart(){
 
-    showScene(11);
+    showScene(10);
 
     collectRunning = true;
 

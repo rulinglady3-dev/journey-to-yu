@@ -60,42 +60,65 @@ function drawPlayer(){
 
     playerPulse += 0.08;
 
-    const scale = 1 + Math.sin(playerPulse) * 0.05;
+    const scale = 1 + Math.sin(playerPulse) * 0.06;
 
     ctx.save();
 
-    ctx.translate(player.x, player.y);
+    ctx.translate(player.x,player.y);
 
-    ctx.scale(scale, scale);
+    ctx.scale(scale,scale);
 
-    ctx.shadowColor = "#ff7ac8";
-    ctx.shadowBlur = 30;
+    // Glow
+    ctx.shadowColor = "#ff6fb8";
+    ctx.shadowBlur = 35;
 
-    ctx.fillStyle = "#ff82cf";
+    // Yuvarlatılmış kutu
+    ctx.fillStyle = "#ff78c8";
 
     ctx.beginPath();
 
-    ctx.moveTo(0,-18);
-
-    ctx.bezierCurveTo(
-        28,-48,
-        60,-8,
-        0,42
-    );
-
-    ctx.bezierCurveTo(
-        -60,-8,
-        -28,-48,
-        0,-18
+    ctx.roundRect(
+        -26,
+        -26,
+        52,
+        52,
+        16
     );
 
     ctx.fill();
 
+    // Beyaz parıltı
     ctx.shadowBlur = 0;
+
+    ctx.fillStyle = "rgba(255,255,255,.35)";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -10,
+        -10,
+        8,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+    // Ortadaki kalp
+    ctx.font = "28px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    ctx.fillText(
+        "❤️",
+        0,
+        2
+    );
 
     ctx.restore();
 
 }
+
 // =========================================
 // FALLING HEART
 // =========================================
@@ -267,6 +290,22 @@ ctx.fillRect(100,100,100,100);
 
     drawPlayer();
 
+    ctx.save();
+
+ctx.fillStyle = "white";
+
+ctx.font = "bold 28px Arial";
+
+ctx.textAlign = "left";
+
+ctx.fillText(
+    "❤️ " + collectScore + " / 25",
+    35,
+    50
+);
+
+ctx.restore();
+    
     updateSparkles();
 
     if(collectScore >= 25){

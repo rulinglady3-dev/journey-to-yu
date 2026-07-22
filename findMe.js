@@ -4,7 +4,7 @@
 
 let findRunning = false;
 
-let stars = [];
+let findStars = [];
 
 let fakeObjects = [];
 
@@ -19,7 +19,7 @@ function startFindMe(){
 
     findRunning = true;
 
-    stars = [];
+    findStars = [];
 
     fakeObjects = [];
 
@@ -40,7 +40,7 @@ function createFindObjects(){
 
     for(let i=0;i<120;i++){
 
-        stars.push({
+        findStars.push({
 
             x:Math.random()*canvas.width,
 
@@ -122,7 +122,7 @@ function updateFindMe(){
 
     // Yıldızlar
 
-    for(const star of stars){
+    for(const star of findStars){
 
         star.y += star.speed;
 

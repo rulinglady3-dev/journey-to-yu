@@ -169,9 +169,9 @@ function drawPlayer(){
 
     // Glow
 
-    ctx.shadowColor = "#ff70c5";
+    ctx.shadowColor = "transparent";
 
-    ctx.shadowBlur = 35;
+    ctx.shadowBlur = 0;
 
     // Aura
 

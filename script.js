@@ -592,15 +592,15 @@ function animate(){
          updateFindMe();
          break;
             
-        case 13:
+        case 12:
             updateRememberUs();
             break;
 
-        case 14:
+        case 13:
             updateOneLastHug();
             break;
 
-        case 15:
+        case 14:
             updateFinalEngine();
             break;
 

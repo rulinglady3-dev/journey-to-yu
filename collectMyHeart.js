@@ -308,6 +308,8 @@ function updateSparkles(){
 
 function updateCollectMyHeart(){
 
+    console.log("UPDATE");
+
     if(!collectRunning) return;
 
     // Kalpler

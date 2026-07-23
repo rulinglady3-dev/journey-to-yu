@@ -148,6 +148,9 @@ class FallingHeart{
 
 function drawPlayer(){
 
+     ctx.fillStyle = "red";
+     ctx.fillRect(0,0,200,200);
+
     playerScale += (1 - playerScale) * 0.15;
 
     ctx.save();

@@ -39,22 +39,19 @@ const player = {
 
 function startCollectMyHeart(){
 
+    console.log("START COLLECT");
+
     showScene(10);
 
     collectRunning = true;
 
     collectScore = 0;
-
     spawnTimer = 0;
-
     hearts = [];
-
     sparkles = [];
-
     playerScale = 1;
 
     player.x = canvas.width / 2;
-
     player.y = canvas.height - 120;
 
 }

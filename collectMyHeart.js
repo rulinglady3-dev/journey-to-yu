@@ -314,6 +314,8 @@ function updateCollectMyHeart(){
 
     // Kalpler
     updateHearts();
+    
+    console.log(hearts.length);
 
     // Efektler
     updateSparkles();

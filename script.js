@@ -106,18 +106,7 @@ function showScene(index){
 
     currentScene = index;
 
-    scenes.forEach((scene, i) => {
-    console.log(i, scene.id, getComputedStyle(scene).display);
-});
-
-    scenes.forEach((scene, i) => {
-    console.log(i, scene.id, getComputedStyle(scene).display);
-});
-        
-);
-
 }
-
 /*=========================================================
     STARS
 =========================================================*/
